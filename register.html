@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>kinchat | Sign-Up</title>
+		<link rel="Shortcut Icon" href="images/favicon.ico" /> 
+		<link rel="stylesheet" type="text/css" href="stylesheets/main-style.css" />
+		<style type="text/css">
+			
+			#form_container {
+				width: 400px;
+				height: 310px;
+				margin: 0;
+				float: left;
+			}
+			
+			.field_row {
+				width: 400px;
+				height: 26px;
+				margin: 0 0 20px 0;
+			}
+			
+			.label {
+				width: 160px;
+				height: 18px;
+				margin: 0 10px 20px 0;
+				padding: 4px 0;
+				float: left;
+				text-align: left;
+			}
+			
+			#username_symbol {
+				padding: 4px 0;
+				float: left;
+				font-family: "Colaborate Light";
+			}
+			
+			.field_container {
+				width: 200px;
+				height: 26px;
+				margin: 0 0 20px 0;
+				float: left;
+			}
+			
+			.field {
+				width: 178px;
+				height: 18px;
+				padding: 3px 10px;
+				font-family: "Colaborate Light", "Arial";
+				color: dimgray;
+				line-height: 18px;
+			}
+			
+			.info_icon {
+				margin: 4px 0;
+				float: right;
+			}
+			
+			#agreement_notice {
+				height: 20px;
+				margin: auto;
+				font-size: 11pt;
+				text-align: center;
+				font-family: "Colaborate Light";
+				font-size: 11pt;
+			}
+			
+			#submit_button_container {
+				width: 180px;
+				height: 30px;
+				margin: 0px auto;
+			}
+			
+			#submit_button {
+				width: 180px;
+				margin: 10px auto;
+			}
+			
+		</style>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript">
+			
+			$(document).ready(function() {
+				
+				$('body').height($(document).height() - 50);
+				
+				$('#username_symbol').css('margin-right', 5);
+				$('#username_field').css('width', 195 - document.getElementById('username_symbol').clientWidth);
+				$('#username_field').parent().css('width', 195 - document.getElementById('username_symbol').clientWidth);
+				
+			});
+			
+		</script>
+	</head>
+	<body>
+		<div id="nav_bar">
+			<div id="logo_container">
+				<a href="http://localhost/" title="Home"><img id="logo" src="images/logo.png" alt="" /></a>
+			</div>
+			<div id="button_container">
+				<a href="index.html"><div class="button">Home</div></a>
+				<a href="register.html"><div class="button">Sign-Up</div></a>
+				<a href="http://www.facebook.com/pages/Kinchat/190740614297028" target="_blank"><div class="button">Facebook</div></a>
+				<a href="mailto:support@trykinchat.com" style="margin: 0;"><div class="button">Contact Us</div></a>
+			</div>
+		</div>
+		<div id="container">
+			<div id="form_container">
+				<form method="POST" action="new_user/add_user.php">
+					<h1>Sign-Up</h1>
+					<div class="field_row">
+						<div class="label">
+							Username
+						</div>
+						<div id="username_symbol">
+							@
+						</div>
+						<div class="field_container">
+							<input id="username_field" class="field" name="username" type="text" value="" spellcheck="false" />
+						</div>
+						<img class="info_icon" src="images/info_icon.gif" alt="" title="Your username must be between 4 and 20 characters. Only letters, numbers, and underscores are allowed." />
+					</div>
+					<div class="field_row">
+						<div class="label">
+							E-mail Address
+						</div>
+						<div class="field_container">
+							<input class="field" name="email" type="text" value="" spellcheck="false" />
+						</div>
+					</div>
+					<div class="field_row">
+						<div class="label">
+							Password
+						</div>
+						<div class="field_container">
+							<input class="field" name="password" type="password" value="" spellcheck="false" />
+						</div>
+						<img class="info_icon" src="images/info_icon.gif" alt="" title="Your password must be between 8 and 20 characters." />
+					</div>
+					<div class="field_row">
+						<div class="label">
+							Re-type Password
+						</div>
+						<div class="field_container">
+							<input class="field" name="verify_password" type="password" value=""spellcheck="false" />
+						</div>
+					</div>
+					<div id="agreement_notice">
+						By creating your account, you agree to the <a href="terms/terms.pdf" target="_blank">Terms of Use</a>.
+					</div>
+					<br />
+					<div id="submit_button_container">
+						<input id="submit_button" class="button" type="submit" value="Create New Account" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

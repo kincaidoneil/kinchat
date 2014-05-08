@@ -1,0 +1,4 @@
+jQuery Info:
+----------------
+jquery-ui.custom.min.js - v1.8.14
+jquery.min.js - v1.5.1
