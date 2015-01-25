@@ -1,6 +1,9 @@
 kinchat
 =======
-kinchat is a free, rich-text chat client based in PHP. A demo is available to view on [YouTube](https://www.youtube.com/watch?v=rdCnedrxslk).
+
+##### kinchat is a free, rich-text chat client based in PHP. A demo is available to view on [YouTube](https://www.youtube.com/watch?v=rdCnedrxslk).
+
+![Screenshot 1](screenshots/screenshot1.png)
 
 ## Configuration
 1. TODO: Write instructions for MySQL database setup.
