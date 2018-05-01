@@ -1,5 +1,393 @@
-<script type="text/javascript">
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<title>kinchat</title>
+		
+		<meta name="description" content="The free, online rich-text chat client." />
+		
+		<link rel="Shortcut Icon" href="/images/favicon.ico" />
+		
+		<style type="text/css">
+			
+			body, html {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+
+			#backgroundImage {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				z-index: 1;
+			}
+
+			#container {
+				width: 1000px;
+				height: 600px;
+				margin: 0 auto;
+				position: relative;
+				z-index: 2;
+			}
+
+			#header {
+				width: 1000px;
+				height: 120px;
+				margin: 0 auto;
+			}
+
+			#logo {
+				margin: 35px 0;
+				opacity: 1;
+			}
+
+			#textBoxContainer {
+				width: 400px;
+				height: 200px;
+				padding: 25px;
+				float: left;
+				border-radius: 10px;
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				background-color: #FFFFFF;
+				box-shadow: 0px 0px 15px #808080;
+				-webkit-box-shadow: 0px 0px 15px #808080;
+				-moz-box-shadow: 0px 0px 15px #808080;
+			}
+
+			#formattingRibbon {
+				width: 300px;
+				height: 50px;
+				margin: 5px auto 25px auto;
+				padding: 0;
+				background-color: #E3F4F6;
+				border-radius: 5px;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				box-shadow: inset 0px 0px 10px #A9A9A9;
+				-moz-box-shadow: inset 0px 0px 10px #A9A9A9;
+				-webit-box-shadow: inset 0px 0px 10px #A9A9A9;
+			}
+
+			#buttonContainer {
+				margin: 0 6px;
+				float: left;
+			}
+		
+			.buttons {
+				padding: 5px;
+				margin: 8px 10px 12px 10px;
+				float: left;
+				border-radius: 3px;
+				-webkit-border-radius: 3px;
+				-moz-border-radius: 3px;
+				background-color: #ADD8E6;
+				box-shadow: 0px 2px 4px #808080;
+				-moz-box-shadow: 0px 2px 4px #808080;
+				-webkit-box-shadow: 0px 2px 4px #808080;
+				text-align: center;
+				font-size: 20px;
+				cursor: pointer;
+				font-family: Monospace, "Courier New";
+			}
+
+			.buttons:hover {
+				color: #FFFFFF;
+				box-shadow: 0px 0px 0px #FFFFFF;
+				-webkit-box-shadow: 0px 0px 0px #FFFFFF;
+				-moz-box-shadow: 0px 0px 0px #FFFFFF;
+			}
+
+			#textBox {
+				width: 380px;
+				height: 100px;
+				margin: auto;
+				padding: 10px;
+				background-color: #DEEFF5;
+				border: none;
+				border-radius: 3px;
+				-webkit-border-radius: 3px;
+				-moz-border-radius: 3px;
+				box-shadow: inset 0px 0px 10px #A9A9A9;
+				-webkit-box-shadow: inset 0px 0px 10px #A9A9A9;
+				-moz-box-shadow: inset 0px 0px 10px #A9A9A9;
+				cursor: text;
+			}
+
+			#chatViewingPaneContainer {
+				width: 400px;
+				height: 430px;
+				margin: 0 0 0 100px;
+				padding: 25px;
+				float: left;
+				border-radius: 10px;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				box-shadow: 0px 0px 15px #808080;
+				-webkit-box-shadow: 0px 0px 15px #808080;
+				-moz-box-shadow: 0px 0px 15px #808080;
+				background-color: #FFFFFF;
+			}
+
+			#chatViewingPane {
+				width: 400px;
+				height: 430px;
+				margin: auto;
+				padding: 0;
+				overflow: auto;
+				font-family: "Segoe UI", "Trebuchet MS", "Arial", "Times New Roman";
+				font-size: 14px;
+			}
+
+			.message {
+				width: 340px;
+				margin: auto;
+				padding: 8px 0;
+				border-bottom: 1px solid #A9A9A9;
+				color: #000000;
+			}
+			
+		</style>
+		
+		<script type="text/javascript" src="/scripts/jQuery.js"></script>
+		
+		<script type="text/javascript" src="/scripts/designMode.js"></script>
+		
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-17741535-2']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+
+		</script>
+		
+	</head>
 	
-	document.location = 'index.php';
+	<body onLoad="load()">
+		
+		<img id="backgroundImage" src="/images/background.png" />
+		
+		<div id="container">
+			
+			<div id="header">
+				
+				<img id="logo" src="/images/kinchat.png" alt="kinchat" />
+			
+			</div>
+			
+			<div id="textBoxContainer">
+
+				<div id="formattingRibbon">
+
+					<div id="buttonContainer">
+					
+						<div class="buttons" onclick="formatText('bold')" style="font-weight: bold;" title="Bold">B</div>
+					
+						<div class="buttons" onclick="formatText('italic')" style="font-style: italic;" title="Italic">I</div>
+					
+						<div class="buttons" onclick="formatText('underline')" style="text-decoration: underline;" title="Underline">U</div>
+					
+						<div class="buttons" onclick="formatText('strikethrough')" style="text-decoration: line-through;" title="Strikethrough">abc</div>
+					
+						<div class="buttons" onclick="formatText('subscript')" title="Subscript">x<span style="vertical-align: text-bottom; font-size: 10px;">2</span></div>
+					
+						<div class="buttons" onclick="formatText('superscript')" title="Superscript">x<span style="vertical-align: text-top; font-size: 10px;">2</span></div>
+				
+					</div>
+				
+				</div>
+
+				<iframe id="textBox"></iframe>
+			
+			</div>
+		
+			<div id="chatViewingPaneContainer">
+				
+				<div id="chatViewingPane"></div>
+				
+			</div>
+			
+		</div>
+		
+		<script type="text/javascript">
+			
+			var id = 0;
+
+			function load() {
+				
+				document.getElementById('textBox').designMode = "On";
+				
+				editContent();
+				loadChats();
+				formatText('fontName', 'Trebuchet MS');
+
+				document.getElementById('textBox').contentWindow.addEventListener('keypress', function(event) {
+
+					// On Press of 'Enter', Enter Chat
+
+					if (window.event) {
+						event = window.event;
+					}
+
+					if (event.keyCode == 13) {
+						enterChat();
+					}
+
+				}, false);
+
+			}
+
+			function editContent() {
+				
+				$('#textBox').designMode('on');
+
+			}
+
+			function formatText(name, value) {
+
+				$('#textBox').execCommand(name, false, value);
+				document.getElementById('textBox').contentWindow.focus();
+
+			}
+
+			function enterChat() {
+
+				document.getElementById('textBox').contentWindow.focus();
+
+				if (document.getElementById('textBox').contentWindow.document.body.innerHTML == '') {
+
+					alert('Please enter a chat.');
+					document.getElementById('textBox').contentWindow.document.body.innerHTML = '';
+
+				}
+
+				else {
+
+					var html = document.getElementById('textBox').contentWindow.document.body.innerHTML;
+					var html = html.replace(/&/g, '%26');
+					document.getElementById('textBox').contentWindow.document.body.innerHTML = '';
+
+					xmlhttp = new XMLHttpRequest();
+					xmlhttp.open('GET', 'appendChat.php?id=' + id + '&hour=' + getDate()[0] + '&minute=' + getDate()[1] + '&half=' + getDate()[2] + '&day=' + getDate()[3] + '&month=' + getDate()[4] + '&date=' + getDate()[5] + '&body=' + html, true);
+					xmlhttp.send();
+
+				}
+				
+				document.getElementById('textBox').contentWindow.document.body.innerHTML = '';
+				document.getElementById('textBox').contentWindow.focus();
+				formatText('fontName', 'Trebuchet MS');
+
+			}
+
+			function getDate() {
+
+				var today = new Date();
+				var hour = ["12","1","2","3","4","5","6","7","8","9","10","11","12","1","2","3","4","5","6","7","8","9","10","11"];
+				var minute = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"];
+				var day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+				var date = [null,"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","13th","14th","15th","16th","17th","18th","19th","20th","21st","22nd","23rd","24th","25th","26th","27th","28th","29th","30th","31st"];
+				var month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+				if (today.getHours() < 11) {
+
+					var half = 'AM';
+
+				}
+
+				else {
+
+					var half = 'PM';
+
+				}
+
+				return [hour[today.getHours()], minute[today.getMinutes()], half, day[today.getDay()], month[today.getMonth()], date[today.getDate()]];
+
+			}
+
+			function loadChats() {
+
+				request = new XMLHttpRequest();
+				request.open('GET', 'loadChats.php', true);
+				request.send();
+
+				request.onreadystatechange = function() {
+
+					if (request.readyState == 4 && request.status == 200) {
+						
+						var jsonStr = JSON.parse(request.responseText);
 	
-</script>
+						var numberOfChats = jsonStr.length;
+						var chatsDisplayed = numberOfChats - 1;
+						
+						id = numberOfChats;
+			
+						while (chatsDisplayed >= 0) {
+		
+							var body = jsonStr[chatsDisplayed].body;
+							var message = '<div class="message">' + '&emsp;&emsp;' + body + '<\/div>';
+		
+							document.getElementById('chatViewingPane').innerHTML = document.getElementById('chatViewingPane').innerHTML + message;
+		
+							chatsDisplayed--;
+	
+						}
+						
+						getChat();
+
+					}
+
+				}
+
+			}
+
+			function getChat() {
+				
+				requestChat = new XMLHttpRequest();
+				requestChat.open('GET', 'getChat.php?id=' + id, true);
+				requestChat.send();
+				
+				requestChat.onreadystatechange = function() {
+
+					if (requestChat.readyState == 4 && requestChat.status == 200) {
+						
+						var jsonStr = JSON.parse(requestChat.responseText);
+						
+						if (jsonStr.id > id && jsonStr.id != null) {
+							
+							id = jsonStr.id;
+							var body = jsonStr.body;
+							var message = '<div class="message">' + '&emsp;&emsp;' + body + '<\/div>';
+	
+							document.getElementById('chatViewingPane').innerHTML = message + document.getElementById('chatViewingPane').innerHTML;
+							
+							setTimeout('getChat()', 500);
+							
+						}
+						
+						else {
+							
+							setTimeout('getChat()', 1500);
+							
+						}
+	
+					}
+
+				}
+
+			}
+			
+		</script>
+		
+	</body>
+
+</html>
